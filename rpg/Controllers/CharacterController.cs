@@ -1,5 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
 using rpg.Models;
+using System.Linq;
+using System.Collections.Generic;
+using rpg.Services.CharacterServices;
 
 namespace rpg.Controllers
 {
@@ -7,11 +10,35 @@ namespace rpg.Controllers
     [Route("[controller]")]
     public class CharacterController : ControllerBase
     {
-        private static Character knight = new Character();
 
+        private readonly ICharacterService _characterService;
+
+        public CharacterController(ICharacterService characterService)
+        {
+            _characterService = characterService;
+        }
+
+        private static List<Character> characters = new List<Character> {
+            new Character(),
+            new Character { Id = 1, Name = "Sam"}
+        };
+
+        [HttpGet("GetAll")]
         public IActionResult Get()
         {
-            return Ok(knight);
+            return Ok(_characterService.GetAllCharacters());
+        }
+
+        [HttpGet("{id}")]
+        public IActionResult GetSingle(int id)
+        {
+            return Ok(_characterService.GetCharacterById(id));
+        }
+
+        [HttpPost]
+        public IActionResult AddCharacter(Character newCharacter)
+        {
+            return Ok(_characterService.AddCharacter(newCharacter));
         }
     }
 }
