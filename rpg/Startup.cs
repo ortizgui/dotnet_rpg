@@ -18,6 +18,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using rpg.Data;
 using rpg.Services.CharacterServices;
+using rpg.Services.WeaponServices;
 
 namespace rpg
 {
@@ -51,6 +52,7 @@ namespace rpg
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddScoped<ICharacterService, CharacterService>();
             services.AddScoped<IAuthRepository, AuthRepository>();
+            services.AddScoped<IWeaponService, WeaponService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
