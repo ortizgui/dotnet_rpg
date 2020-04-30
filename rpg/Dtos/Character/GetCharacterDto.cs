@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using rpg.Dtos.Skill;
 using rpg.Dtos.Weapon;
 using rpg.Models;
 
@@ -13,5 +15,6 @@ namespace rpg.Dtos.Character
         public int Intelligence { get; set; } = 10;
         public RpgClass Class { get; set; } = RpgClass.Knight;
         public GetWeaponDto Weapon { get; set; }
+        public List<GetSkillDto> Skills { get; set; }
     }
 }
